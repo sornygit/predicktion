@@ -17,6 +17,7 @@ they came through rub them in people's faces and say I TOLD YOU SO, in style?
 Your first option is to use the website the application is deployed to. It's not open for anyone yet though, sorry.
 
 So...
+
 1. The project is a standard Maven project using Java 8 with sourcelevel 8. Import it into your IDE.
 
 2. Create an application.properties file in src/main/resources (or put it on your server's classpath). 

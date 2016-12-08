@@ -5,7 +5,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
- * Created by Magnus on 2016-12-01.
+ * Spring Boot Web configuration
  */
 @Component
 public class WebConfiguration extends WebMvcConfigurerAdapter {

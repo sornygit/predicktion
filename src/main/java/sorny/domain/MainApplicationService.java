@@ -1,4 +1,4 @@
-package sorny.domain.user;
+package sorny.domain;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
@@ -17,20 +17,24 @@ import sorny.domain.crypto.CryptoTool;
 import sorny.domain.prediction.CameTrueStatus;
 import sorny.domain.prediction.PredictionEntity;
 import sorny.domain.prediction.PredictionRepository;
+import sorny.domain.user.UserEntity;
+import sorny.domain.user.UserRepository;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Main application service
+ */
 @Service
 @Transactional
-public class UserService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
+public class MainApplicationService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(MainApplicationService.class);
     private final String message = "User information is already taken by another user.";
 
     @Autowired
@@ -42,8 +46,8 @@ public class UserService {
     @PersistenceContext
     EntityManager entityManager;
 
-    public UserService() {
-        LOGGER.debug("Starting " + UserService.class.getSimpleName() + " ...");
+    public MainApplicationService() {
+        LOGGER.debug("Starting " + MainApplicationService.class.getSimpleName() + " ...");
     }
 
     @PostConstruct
@@ -51,7 +55,8 @@ public class UserService {
         UserEntity admin = userRepository.getByUsername("admin");
         if (admin == null) {
             try {
-                // The password below needs to be changed to something non-trivial before production, and will crash app startup unless you set it!
+                // The password below needs to be changed to something non-trivial before production,
+                // and will crash app startup unless you set it!
                 admin = new UserEntity("admin", "admin!", "sornydude@gmail.com");
             } catch (UserException e) {
                 throw new RuntimeException("Couldn't create administrator user due to the following problem: " + e.getMessage());

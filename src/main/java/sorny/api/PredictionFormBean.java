@@ -11,7 +11,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
 /**
- * Created by Magnus on 2016-12-04.
+ * Prediction form bean
  */
 public class PredictionFormBean implements Serializable {
     private Long id;

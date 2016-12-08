@@ -53,13 +53,20 @@
                         <span id="braggingMessage" th:text="${prediction.braggingMessage}"></span>
                     </p>
                     <p>
-                        <a th:href="@{${prediction.braggingLink}}">Go to bragging link</a>
+                        <img th:if="${T(sorny.application.LinkType).isImageLink(prediction.braggingLink)}"
+                             th:src="${prediction.braggingLink}"/>
+                        <video th:if="${T(sorny.application.LinkType).isVideoLink(prediction.braggingLink)}"
+                               id="braggingLink" th:src="${prediction.braggingLink}" controls></video>
+                        <iframe th:if="${T(sorny.application.LinkType).isYouTubeLink(prediction.braggingLink)}"
+                                width="420" height="315" th:src="${prediction.braggingLink}" frameborder="0"></iframe>
+                        <a th:if="${T(sorny.application.LinkType).isOtherLink(prediction.braggingLink)}"
+                           th:href="${prediction.braggingLink}">Click meh!</a>
                     </p>
                     <p>
                         Submitted at: <span id="submitted" th:text="${prediction.submitted}"></span>
                     </p>
                     <div class="top10">
-                        <a th:href="@{/brag(id=${prediction.id})}" class="btn btn-default">Brag!</a>
+                        <a th:href="@{/brag(id=${prediction.id})}" class="btn btn-default">Announce your result!</a>
                     </div>
                 </div>
             </div>
@@ -73,23 +80,5 @@
 <script type="text/javascript" src="js/tooltip.js"></script>
 <script type="text/javascript" src="js/moment.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/bootstrap-datetimepicker.min.js"></script>
-<!--<script type="text/javascript" src="js/typeahead.bundle.js"></script>-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
-<!--<script type="text/javascript">-->
-<!--var data = [{ id: 0, text: 'enhancement' }, { id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }];-->
-<!--$('keyWords').select2({-->
-<!--tags: true,-->
-<!--tokenSeparators: [',', ' '],-->
-<!--data: data,-->
-<!--});-->
-<!--</script>-->
-<script type="text/javascript">
-$('#unravelDatePicker').datetimepicker({
-    format: 'YYYY-MM-DD'
-});
-
-
-</script>
 </body>
 </html>

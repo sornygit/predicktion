@@ -7,19 +7,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import sorny.domain.user.UserEntity;
-import sorny.domain.user.UserService;
+import sorny.domain.MainApplicationService;
 
 /**
- * Created by Magnus on 2016-12-01.
+ * Main controller for index, login mappings
  */
 @Controller
 public class MainController {
     @Autowired
-    UserService userService;
+    MainApplicationService mainApplicationService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Model model) {
-        UserEntity user = userService.getCurrentlyLoggedInUser();
+        UserEntity user = mainApplicationService.getCurrentlyLoggedInUser();
         model.addAttribute("user", user);
         return "index";
     }

@@ -12,17 +12,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import sorny.api.error.IllegalEmailAddressException;
 import sorny.domain.user.UserEntity;
 import sorny.api.UserDetailsFormBean;
-import sorny.domain.user.UserService;
+import sorny.domain.MainApplicationService;
 
 import javax.validation.Valid;
 
 /**
- * Created by Magnus on 2016-12-01.
+ * Controller for user-related operations
  */
 @Controller
 public class UserController {
     @Autowired
-    UserService userService;
+    MainApplicationService mainApplicationService;
 
     @GetMapping("/signup")
     public String signup(@ModelAttribute UserDetailsFormBean formBean, BindingResult bindingResult, Model model) {
@@ -41,7 +41,7 @@ public class UserController {
         }
         String feedback = null;
         Boolean error = null;
-        UserEntity user = userService.signUp(formBean.getUsername(), formBean.getNewPassword(), formBean.getEmail());
+        UserEntity user = mainApplicationService.signUp(formBean.getUsername(), formBean.getNewPassword(), formBean.getEmail());
         final String errorText = "User " + user.getUsername() + " not created due to an error.";
 
         if (user != null) {
@@ -60,7 +60,7 @@ public class UserController {
 
     @GetMapping("/userdetails")
     public String userDetails(Model model) {
-        UserEntity user = userService.getCurrentlyLoggedInUser();
+        UserEntity user = mainApplicationService.getCurrentlyLoggedInUser();
         final UserDetailsFormBean userDetailsFormBean = new UserDetailsFormBean(user.email, null, null);
         userDetailsFormBean.setUsername(user.username);
         model.addAttribute("user", user);
@@ -73,7 +73,7 @@ public class UserController {
     @PostMapping("/userdetails")
     @Transactional
     public String userDetailsUpdate(@ModelAttribute UserDetailsFormBean formBean, Model model) {
-        UserEntity user = userService.getCurrentlyLoggedInUser();
+        UserEntity user = mainApplicationService.getCurrentlyLoggedInUser();
         final String errorText = "User " + user.getUsername() + " not updated, because you don't know what you're doing.";
 
         Boolean error = null;
@@ -100,7 +100,7 @@ public class UserController {
         }
 
         if (error == null) {
-            user = userService.persist(user);
+            user = mainApplicationService.persist(user);
             feedback = "User details updated." +
                     (!StringUtils.isEmpty(formBean.getNewPassword()) ? "" :
                             " Well, atleast your email since you're too dumb to handle the password change.");

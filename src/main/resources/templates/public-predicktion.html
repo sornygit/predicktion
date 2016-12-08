@@ -23,10 +23,13 @@
             </div>
             <div class="row top10">
                 <div class="col-lg-12">
-                    <h1>BRAGGIN' TIME!</h1>
                     <p>
-                        User [<span th:text="${user.username}">Username</span>] (<span th:text="${user.email}">Email</span>) made the following predicktion..
+                        <strong>User [<span th:text="${user.username}">Username</span>] (<span th:text="${user.email}">Email</span>) made the following predicktion..</strong>
                     </p>
+                </div>
+            </div>
+            <div class="row top5">
+                <div class="col-lg-6">
                     <p>
                         <strong>Topic:</strong> <span id="topic" th:text="${prediction.topic}"></span>
                     </p>
@@ -40,13 +43,21 @@
                         <strong>Did prediction come true?</strong> <span id="cameTrueStatus" th:text="${prediction.cameTrueStatus}"></span>
                     </p>
                     <p>
-                        <strong>Their message to you about their predicktion:</strong>
+                        <strong>Message to you about the predicktion:</strong>
                     </p>
                     <p>
                         <span id="braggingMessage" th:text="${prediction.braggingMessage}"></span>
                     </p>
                     <p>
-                        <strong>They also wanted you to see this:</strong>
+                        Predicktion submitted at: <span id="submitted" th:text="${prediction.submitted}"></span>
+                    </p>
+                    <p>
+                        Hey! <a th:href="@{/login}" class="btn btn-success">You want to make Predicktions too?</a>
+                    </p>
+                </div>
+                <div class="col-lg-6 well">
+                    <p>
+                        <strong>You were also supposed to see this:</strong>
                     </p>
                     <p>
                         <img th:if="${T(sorny.application.LinkType).isImageLink(prediction.braggingLink)}"
@@ -54,15 +65,9 @@
                         <video th:if="${T(sorny.application.LinkType).isVideoLink(prediction.braggingLink)}"
                                id="braggingLink" th:src="${prediction.braggingLink}" controls></video>
                         <iframe th:if="${T(sorny.application.LinkType).isYouTubeLink(prediction.braggingLink)}"
-                                width="420" height="315" th:src="${prediction.braggingLink}" frameborder="0"></iframe>
+                                width="350" height="270" th:src="${prediction.braggingLink}" frameborder="0"></iframe>
                         <a th:if="${T(sorny.application.LinkType).isOtherLink(prediction.braggingLink)}"
                            th:href="${prediction.braggingLink}">Click meh!</a>
-                    </p>
-                    <p>
-                        Predicktion submitted at: <span id="submitted" th:text="${prediction.submitted}"></span>
-                    </p>
-                    <p>
-                        Hey! You want <a th:href="/login">to make Predicktions too</a>?
                     </p>
                 </div>
             </div>

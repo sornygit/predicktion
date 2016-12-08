@@ -1,7 +1,7 @@
 package sorny.domain.crypto;
 
 /**
- * Created by Magnus on 2016-12-05.
+ * Crypto result transport object
  */
 public class CryptoResult {
     public String aesKey;

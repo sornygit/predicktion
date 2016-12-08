@@ -8,7 +8,7 @@ import java.nio.charset.Charset;
 import java.util.Base64;
 
 /**
- * Created by Magnus on 2016-12-05.
+ * Encryption/decryption class
  */
 public class CryptoTool {
 

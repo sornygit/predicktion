@@ -8,10 +8,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Created by Magnus on 2016-12-06.
+ * javax.validation Validator for ensuring a date is after tomorrow.
  */
 public class AfterTomorrowValidator implements ConstraintValidator<AfterTomorrow, String> {
-
     @Override
     public void initialize(AfterTomorrow afterTomorrow) {
     }

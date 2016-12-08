@@ -7,7 +7,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import java.io.Serializable;
 
 /**
- * Created by Magnus on 2016-12-03.
+ * User details form bean
  */
 public class UserDetailsFormBean implements Serializable {
     @NotEmpty

@@ -1,7 +1,7 @@
 package sorny.application;
 
 /**
- * Created by Magnus on 2016-12-06.
+ * Helper methods for establishing link type of the bragging link
  */
 public class LinkType {
     public static boolean isImageLink(String url) {

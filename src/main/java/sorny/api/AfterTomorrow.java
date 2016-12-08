@@ -1,11 +1,7 @@
 package sorny.api;
 
-import java.lang.annotation.Annotation;
-
 /**
- * Created by Magnus on 2016-12-06.
+ * javax.validation annotation for the {@link AfterTomorrowValidator}
  */
 public @interface AfterTomorrow {
-
-
 }

@@ -8,18 +8,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
+import sorny.domain.MainApplicationService;
 
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 @Transactional
-public class UserServiceTest {
+public class MainApplicationServiceTest {
     @Autowired
     UserRepository userRepository;
 
     @Autowired
-    UserService userService;
+    MainApplicationService mainApplicationService;
 
     private UserEntity user;
 
@@ -37,13 +38,13 @@ public class UserServiceTest {
 
     @Test
     public void testCreateNewAndGetUser() throws Exception {
-        UserEntity user = userService.signUp("username", "123=password", "another@email.com");
+        UserEntity user = mainApplicationService.signUp("username", "123=password", "another@email.com");
 
-        user = userService.persist(user);
+        user = mainApplicationService.persist(user);
 
         assertEquals("username", user.getUsername());
 
-        UserEntity saved = userService.getByUsername(user.getUsername());
+        UserEntity saved = mainApplicationService.getByUsername(user.getUsername());
 
         assertEquals(user, saved);
     }

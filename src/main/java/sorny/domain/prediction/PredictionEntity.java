@@ -18,7 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by Magnus on 2016-12-02.
+ * JPA Entity for predictions
  */
 @Entity
 public class PredictionEntity implements Serializable {

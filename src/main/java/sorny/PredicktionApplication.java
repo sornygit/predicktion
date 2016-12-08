@@ -10,6 +10,9 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 
+/**
+ * Spring Boot main application class
+ */
 @SpringBootApplication(scanBasePackages = "sorny")
 @EnableWebMvc
 public class PredicktionApplication extends SpringBootServletInitializer {

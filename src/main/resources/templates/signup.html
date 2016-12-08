@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Predicktion - Sign Up</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="/css/bootstrap-datetimepicker.min.css" th:href="@{/css/bootstrap-datetimepicker.min.css}"/>
+    <link rel="stylesheet" href="/css/predicktion.css" th:href="@{/css/predicktion.css}"/>
+</head>
+<body>
+<div class="container" style="margin-top: 10px">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+            <div class="row">
+                <div class="text-center alert alert-info">
+                    <div class="headline"><h1>PREDICKTION&trade;</h1></div>
+                    <div class="mute small">If you like being a dick to people</div>
+                </div>
+            </div>
+            <div class="row top10" th:unless="${#strings.isEmpty(feedback)}">
+                <div th:if="${error != null}" class="alert alert-danger">
+                    <span th:text="${feedback}">Feedback</span>
+                </div>
+                <div th:if="${error == null}" class="alert alert-success">
+                    <span th:text="${feedback}">Feedback</span>
+                </div>
+            </div>
+            <div class="row top10">
+                <p class="lead"><img src="/images/sorny.png"/> Sign Up by filling out this form</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <form action="#" th:action="@{/signup}" th:object="${formBean}" method="post">
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control" id="username"
+                                   th:field="*{username}"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="text" class="form-control" id="email"
+                                   th:field="*{email}"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="newPassword">Password</label>
+                            <input type="password" class="form-control" id="newPassword"
+                                   name="newPassword" th:field="*{newPassword}"/>
+                        </div>
+                        <button type="submit" class="btn btn-default">Sign Up</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/transition.js"></script>
+<script type="text/javascript" src="js/collapse.js"></script>
+<script type="text/javascript" src="js/alert.js"></script>
+<script type="text/javascript" src="js/tooltip.js"></script>
+<script type="text/javascript" src="js/moment.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="js/typeahead.bundle.js"></script>
+</body>
+</html>

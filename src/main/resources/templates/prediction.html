@@ -1,0 +1,180 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type: text/html;charset=utf-8"/>
+    <title>Predicktion</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="/css/bootstrap-datetimepicker.min.css"
+          th:href="@{/css/bootstrap-datetimepicker.min.css}"/>
+    <link rel="stylesheet" href="/css/predicktion.css" th:href="@{/css/predicktion.css}"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container" style="margin-top: 10px">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+            <div class="row">
+                <div class="text-center alert alert-info">
+                    <div class="headline"><h1>PREDICKTION&trade;</h1></div>
+                    <div class="mute small">If you like being a dick to people</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="btn-group" role="group">
+                    <a href="/" class="btn btn-default" role="button">Main Page</a>
+                    <a href="/prediction" class="btn btn-default active" role="button">Make a Prediction</a>
+                    <a href="/predictions" class="btn btn-default" role="button">List my Predictions</a>
+                    <a href="/userdetails" class="btn btn-default" role="button">Edit User Details</a>
+                    <a href="/logout" class="btn btn-default" role="button">Logout</a>
+                </div>
+            </div>
+            <div class="row top10" th:unless="${#strings.isEmpty(feedback)}">
+                <div th:if="${error != null}" class="alert alert-danger">
+                    <span th:text="${feedback}">Feedback</span>
+                </div>
+                <div th:if="${error == null}" class="alert alert-success">
+                    <span th:text="${feedback}">Feedback</span>
+                </div>
+            </div>
+            <div class="row top10">
+                <div class="col-lg-6">
+                    <form action="#" th:action="@{/prediction}" th:object="${predictionForm}" method="post">
+                        <input type="hidden" id="id" name="id" th:field="*{id}"/>
+                        <div class="form-group">
+                            <label for="topic">Topic <span style="color:#00ff00;" aria-label="Mandatory field">*</span></label>
+                            <input id="topic" name="topic" type="text" class="form-control"
+                                   placeholder="Example: 'Donald Trump as POTUS' (max 255 chars)"
+                                   th:field="*{topic}"/>
+                            <div class="help-block with-errors" th:if="${#fields.hasErrors('topic')}" th:errors="*{topic}">
+                                Errors
+                            </div>
+                        </div>
+                        <div class="form-group" th:if="${predictionForm.id == null}">
+                            <label for="prediction">Your awesome Predicktion&trade; <span style="color:#00ff00;" aria-label="Mandatory field">*</span></label>
+                            <textarea id="prediction" name="prediction" class="form-control"
+                                      placeholder="Enter your prediction (max 2048 chars)"
+                                      th:field="*{prediction}" rows="5">
+                            </textarea>
+                            <div class="help-block with-errors" th:if="${#fields.hasErrors('prediction')}" th:errors="*{prediction}">
+                                Errors
+                            </div>
+                        </div>
+                        <div class="form-group" th:unless="${predictionForm.id == null}">
+                            <label for="prediction">Your awesome Predicktion&trade;</label>
+                            <p>
+                                <span id="prediction">[Encrypted, can't be changed]</span>
+                            </p>
+                        </div>
+                        <div class="form-group">
+                            <label for="braggingLink">Bragging link</label>
+                            <input id="braggingLink" name="braggingLink" type="text" class="form-control"
+                                   placeholder="HTTP link to video or image"
+                                   th:field="*{braggingLink}"/>
+                            <div class="help-block with-errors" th:if="${#fields.hasErrors('braggingLink')}" th:errors="*{braggingLink}">
+                                Errors
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="braggingMessage">Bragging message (to the person you want to be a dick
+                                to)</label>
+                            <textarea id="braggingMessage" name="braggingMessage" class="form-control"
+                                      placeholder="Enter a message for your victim (max 2048 chars)"
+                                      th:field="*{braggingMessage}" rows="5">
+                            </textarea>
+                            <div class="help-block with-errors" th:if="${#fields.hasErrors('braggingMessage')}" th:errors="*{braggingMessage}">
+                                Errors
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="keyWords">Keywords/Hashtags/Ohsohawt</label>
+                            <!--<select id="keyWords" name="keyWords" class="form-control keyWords"-->
+                            <!--th:field="*{keyWords}">-->
+                            <!--</select>-->
+                            <input type="text" id="keyWords" name="keyWords" class="form-control"
+                                   th:field="*{keyWords}" placeholder="Keyword1, Keyword2, ..."/>
+                            <div class="help-block with-errors" th:if="${#fields.hasErrors('keyWords')}" th:errors="*{keyWords}">
+                                Errors
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="unravelDate">Unravel date (auto-reveal date)</label>
+                            <div class="input-group date" id="unravelDatePicker">
+                                <input type="text" class="form-control" id="unravelDate" name="unravelDate"
+                                       th:field="*{unravelDate}" placeholder="YYYY-MM-DD"/>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                                <div class="help-block with-errors" th:if="${#fields.hasErrors('unravelDate')}" th:errors="*{unravelDate}">
+                                    Errors
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" th:unless="${predictionForm.submitted == null}">
+                            <label for="submitted">Submitted at</label>
+                            <p>
+                                <span id="submitted" th:text="${predictionForm.submitted}"></span>
+                            </p>
+                        </div>
+                        <div class="top10">
+                            <button type="submit" class="btn btn-default">Submit Prediction</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-6 well">
+                    <p>
+                        <strong>What happens once you submit the prediction?</strong>
+                    </p>
+                    <p>
+                        Well, the contents of the prediction field will be encrypted, so nobody can see what the
+                        prediction was
+                        until either the unravelDate occurs, or you decide the prediction should be unravelled.
+                    </p>
+                    <p>
+                        The prediction will be timestamped, so that everyone that sees your prediction will know that
+                        you made
+                        it at a certain date and time. If it came true, they will know that you are a GOD amongst men
+                        and should
+                        receive huge amounts of money to make predictions for important people.
+                    </p>
+                    <p>
+                        If the prediction came true, fully or partially, you can invoke your bragging message and
+                        bragging link
+                        upon a selection of people via e-mail, or just give a link to the feeble plebs so they can read
+                        it,
+                        and bask in your glory.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/transition.js"></script>
+<script type="text/javascript" src="js/collapse.js"></script>
+<script type="text/javascript" src="js/alert.js"></script>
+<script type="text/javascript" src="js/tooltip.js"></script>
+<script type="text/javascript" src="js/moment.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/bootstrap-datetimepicker.min.js"></script>
+<!--<script type="text/javascript" src="js/typeahead.bundle.js"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+<!--<script type="text/javascript">-->
+<!--var data = [{ id: 0, text: 'enhancement' }, { id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }];-->
+<!--$('keyWords').select2({-->
+<!--tags: true,-->
+<!--tokenSeparators: [',', ' '],-->
+<!--data: data,-->
+<!--});-->
+<!--</script>-->
+<script type="text/javascript">
+$('#unravelDatePicker').datetimepicker({
+    format: 'YYYY-MM-DD'
+});
+
+</script>
+</body>
+</html>

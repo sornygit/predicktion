@@ -18,10 +18,14 @@ Your first option is to use the website the application is deployed to. It's not
 
 So...
 1. The project is a standard Maven project using Java 8 with sourcelevel 8. Import it into your IDE.
+
 2. Create an application.properties file in src/main/resources (or put it on your server's classpath). 
 Use properties/template.application.properties as a template.
+
 3. Run the class PredicktionApplication.
+
 4. Browse to your server. Sign in with user "admin" password "admin!" the first time (change the password right away, is my tip ;p).
+
 5. Make predicktions, have fun.
 
 ##Techy gore

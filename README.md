@@ -31,6 +31,9 @@ Use properties/template.application.properties as a template.
 ##Techy gore
 
 Application is based on Spring Boot with Thymeleaf as template engine (first time trying it out properly).
+
 Javascript-stuff: jQuery (and a bunch of plugins)
+
 CSS-stuff: Bootstrap
+
 Java 8+

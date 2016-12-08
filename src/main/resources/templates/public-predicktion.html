@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <title>Predicktion</title>
+    <title>Someone wanted to share their prediction with you</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
@@ -12,54 +12,43 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet"/>
 </head>
 <body>
-<div class="container" style="margin-top: 10px">
+<div class="container" style="margin-top: 5px">
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2">
             <div class="row">
                 <div class="text-center alert alert-info">
                     <div class="headline"><h1>PREDICKTION&trade;</h1></div>
-                    <div class="mute small">Someone wanted to be a dick to you and show their predicktion</div>
+                    <div class="mute small">Someone wanted to be a dick to you and show their prediction, submitted at
+                        <span id="submitted" th:text="${prediction.submitted}"></span></div>
                 </div>
             </div>
-            <div class="row top10">
+            <div class="row top5">
                 <div class="col-lg-12">
                     <p>
                         <strong>User [<span th:text="${user.username}">Username</span>] (<span th:text="${user.email}">Email</span>) made the following predicktion..</strong>
                     </p>
-                </div>
-            </div>
-            <div class="row top5">
-                <div class="col-lg-6">
                     <p>
                         <strong>Topic:</strong> <span id="topic" th:text="${prediction.topic}"></span>
                     </p>
-                    <p>
-                        <strong>Prediction:</strong>
-                    </p>
-                    <p>
+                    <strong>Prediction:</strong>
+                    <div class="well">
                         <span id="prediction" th:text="${prediction.prediction}"></span>
-                    </p>
+                    </div>
                     <p>
-                        <strong>Did prediction come true?</strong> <span id="cameTrueStatus" th:text="${prediction.cameTrueStatus}"></span>
+                        <strong>Did the prediction come true?</strong> <span id="cameTrueStatus" class="" th:text="${prediction.cameTrueStatus}"></span>
                     </p>
-                    <p>
-                        <strong>Message to you about the predicktion:</strong>
-                    </p>
-                    <p>
-                        <span id="braggingMessage" th:text="${prediction.braggingMessage}"></span>
-                    </p>
-                    <p>
-                        Predicktion submitted at: <span id="submitted" th:text="${prediction.submitted}"></span>
-                    </p>
-                    <p>
-                        Hey! <a th:href="@{/login}" class="btn btn-success">You want to make Predicktions too?</a>
-                    </p>
-                </div>
-                <div class="col-lg-6 well">
-                    <p>
-                        <strong>You were also supposed to see this:</strong>
-                    </p>
-                    <p>
+                    <div th:unless="${#strings.isEmpty(prediction.braggingMessage)}">
+                        <p>
+                            <strong>Message to you about the prediction:</strong>
+                        </p>
+                        <p>
+                            <span id="braggingMessage" th:text="${prediction.braggingMessage}"></span>
+                        </p>
+                    </div>
+                    <div class="text-center" th:unless="${#strings.isEmpty(prediction.braggingLink)}">
+                        <p>
+                            <strong>You were also supposed to see this:</strong>
+                        </p>
                         <img th:if="${T(sorny.application.LinkType).isImageLink(prediction.braggingLink)}"
                              th:src="${prediction.braggingLink}"/>
                         <video th:if="${T(sorny.application.LinkType).isVideoLink(prediction.braggingLink)}"
@@ -68,7 +57,10 @@
                                 width="350" height="270" th:src="${prediction.braggingLink}" frameborder="0"></iframe>
                         <a th:if="${T(sorny.application.LinkType).isOtherLink(prediction.braggingLink)}"
                            th:href="${prediction.braggingLink}">Click meh!</a>
-                    </p>
+                    </div>
+                    <div class="text-center">
+                        <a th:href="@{/login}" class="btn btn-success">You want to make Predicktions too?</a>
+                    </div>
                 </div>
             </div>
         </div>

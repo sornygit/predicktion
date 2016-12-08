@@ -6,7 +6,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" href="/css/bootstrap-datetimepicker.min.css" th:href="@{/css/bootstrap-datetimepicker.min.css}"/>
+    <link rel="stylesheet" href="/css/bootstrap-datetimepicker.min.css"
+          th:href="@{/css/bootstrap-datetimepicker.min.css}"/>
     <link rel="stylesheet" href="/css/predicktion.css" th:href="@{/css/predicktion.css}"/>
 </head>
 <body>
@@ -19,43 +20,57 @@
                     <div class="mute small">If you like being a dick to people</div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row text-center">
                 <div class="btn-group" role="group">
                     <a href="/" class="btn btn-default active" role="button">Main Page</a>
                     <a href="/prediction" class="btn btn-default" role="button">Make a Prediction</a>
                     <a href="/predictions" class="btn btn-default" role="button">List my Predictions</a>
                     <a href="/userdetails" class="btn btn-default" role="button">Edit User Details</a>
-                    <a href="https://pledgie.com/campaigns/29428" class="btn btn-default" role="button">Donate <i class="fa fa-dollar"></i><i class="fa fa-euro"></i></a>
+                    <a href="https://pledgie.com/campaigns/29428" class="btn btn-default" role="button">Donate <i
+                            class="fa fa-dollar"></i><i class="fa fa-euro"></i></a>
                     <a href="/logout" class="btn btn-default" role="button">Logout</a>
                 </div>
             </div>
             <div class="row top10">
-                <p class="lead">Greetings, <span th:text="${user.username}">Bob</span>! Ready to make a prediction or two?</p>
-                <p>
-                    So what's this about?
-                </p>
-                <p>
-                    Well, the inspiration comes from the 2016 presidential election, where social media was
-                    overflowing with experts on geopolitics, fortunetellers and what not.
-                </p>
-                <p>
-                    Apparantly though, the 'experts' and most of mainstream media had severly underestimated
-                    how fed up people are with the current state of things and voted in a sexist bigot with
-                    megalomania. Still better than crooked Killary, some may say. Well, that's up to you.
-                </p>
-                <p>
-                    Anyway, wouldn't it have felt nice to have been able to make your predictions, and then when
-                    they came through rub them in people's faces and say I TOLD YOU SO, in style?
-                </p>
-                <p>
+                <div class="col-lg-12">
+                    <p class="lead">Greetings, <span th:text="${user.username}">Bob</span>! Ready to make a prediction
+                        or two?</p>
+                </div>
+                <div class="col-lg-12">
+                    <strong>So what's this about?</strong>
+                </div>
+                <div class="col-lg-12 top5">
+                    <p>
+                        Well, the inspiration comes from the 2016 presidential election, where social media was
+                        overflowing with experts on geopolitics, fortunetellers and what not.
+                    </p>
+                </div>
+                <div class="col-lg-8 top5">
+                    <p>
+                        Apparantly though, the 'experts' and most of mainstream media had severly underestimated
+                        how fed up people are with the current state of things and voted in a sexist bigot with
+                        megalomania. Still better than crooked Killary, some may say. Well, that's up to you.
+                    </p>
+                    <p>
+                        Anyway, wouldn't it have felt nice to have been able to make your predictions, and then when
+                        they came through rub them in people's faces and say I TOLD YOU SO, in style?
+                    </p>
+                </div>
+                <div class="col-lg-4 top5"><img th:src="@{/images/trollol.jpg}"/></div>
+                <div class="col-lg-12 top5">
                     <strong>That's exactly the purpose of this application.</strong> Enjoy.
-                </p>
-                <p th:if="${user.getPredictionEntities().isEmpty()}">
-                    <a th:href="@{/prediction}" class="btn btn-success">Make your FIRST Predicktion!</a>
-                </p>
-                <p>
-                    &copy; 2016 <a href="mailto:sornydude@gmail.com">Sorny</a>. All rights reserved (but it's free to use as long as you don't sue me for any malfunctions).
-                </p>
+                </div>
+                <div class="col-lg-12 top5">
+                    <p th:if="${user.getPredictionEntities().isEmpty()}">
+                        <a th:href="@{/prediction}" class="btn btn-success">Make your FIRST Predicktion!</a>
+                    </p>
+                </div>
+                <div class="col-lg-12 top5">
+                    <p>
+                        &copy; 2016 <a href="mailto:sornydude@gmail.com">Sorny</a>. All rights reserved (but it's free
+                        to use as long as you don't sue me for any malfunctions).
+                    </p>
+                </div>
             </div>
         </div>
     </div>
@@ -114,11 +129,21 @@ $('#the-basics .typeahead').typeahead({
 });
 
 
+
+
+
+
+
 </script>
 <script type="text/javascript">
 $(function () {
     $('#datetimepicker1').datetimepicker();
 });
+
+
+
+
+
 </script>
 </body>
 </html>

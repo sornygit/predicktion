@@ -45,6 +45,23 @@ public class PredictionController {
         return "predictionlist";
     }
 
+    @GetMapping("/delete")
+    public String deletePrediction(@RequestParam(value = "id", required = false) Long id, Model model) {
+        if (mainApplicationService.deletePrediction(id)) {
+            model.addAttribute("feedback", "Prediction deleted (you chicken).");
+            model.addAttribute("error", null);
+        } else {
+            model.addAttribute("feedback", "Prediction could not be deleted. HA!");
+            model.addAttribute("error", true);
+        }
+
+        UserEntity user = mainApplicationService.getCurrentlyLoggedInUser();
+        model.addAttribute("user", user);
+        model.addAttribute("predictions", user.getPredictionEntities());
+
+        return "predictionlist";
+    }
+
     @GetMapping("/prediction")
     public String prediction(@RequestParam(value = "id", required = false) Long id, Model model) {
         UserEntity user = mainApplicationService.getCurrentlyLoggedInUser();
@@ -82,7 +99,8 @@ public class PredictionController {
                 model.addAttribute("predictionForm", formBean);
                 UserEntity user = mainApplicationService.getCurrentlyLoggedInUser();
                 model.addAttribute("user", user);
-                model.addAttribute("feedback", "Prediction has validation errors. Fill out required fields and ensure unravelDate is later than tomorrow.");
+                model.addAttribute("feedback", "Prediction has validation errors. " +
+                        "Fill out required fields and ensure unravelDate is later than tomorrow.");
                 model.addAttribute("error", true);
 
                 return "prediction";
@@ -100,19 +118,25 @@ public class PredictionController {
                                     @RequestParam(value="cameTrue", required = true) String cameTrue, Model model) {
         CameTrueStatus cameTrueStatus = CameTrueStatus.valueOf(cameTrue);
         UserEntity user = mainApplicationService.getCurrentlyLoggedInUser();
-        PredictionEntity predictionEntity = mainApplicationService.unravelPrediction(id, cameTrueStatus);
-        if (predictionEntity == null)
-            throw new IllegalArgumentException("No prediction with id " + id);
-
-        model.addAttribute("user", user);
-        model.addAttribute("prediction", predictionEntity);
-        model.addAttribute("feedback", "Prediction decrypted, and status set to " + cameTrueStatus + ". Now, decide if/how you want to brag.");
-
+        PredictionEntity predictionEntity = null;
+        try {
+            predictionEntity = mainApplicationService.unravelPrediction(id, cameTrueStatus);
+            model.addAttribute("error", null);
+            model.addAttribute("user", user);
+            model.addAttribute("prediction", predictionEntity);
+            model.addAttribute("feedback", "Prediction decrypted, and status set to " + cameTrueStatus +
+                    ". Now, decide if/how you want to announce it.");
+        } catch (Exception e) {
+            model.addAttribute("user", user);
+            model.addAttribute("prediction", predictionEntity);
+            model.addAttribute("feedback", "Couldn't unravel prediction: " + e.getMessage());
+            model.addAttribute("error", true);
+        }
         return "unravel";
     }
 
-    @GetMapping("/brag") // todo: add possibility to make a brag comment
-    public String brag(@RequestParam(value = "id", required = true) Long id, Model model) {
+    @GetMapping("/announce") // todo: add possibility to make a brag comment
+    public String announce(@RequestParam(value = "id", required = true) Long id, Model model) {
         UserEntity user = mainApplicationService.getCurrentlyLoggedInUser();
         PredictionEntity predictionEntity = user.getPredictionWithId(id);
         if (predictionEntity == null)

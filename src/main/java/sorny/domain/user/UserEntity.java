@@ -10,9 +10,7 @@ import sorny.domain.security.PasswordHash;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Collections;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * JPA entity for users
@@ -63,8 +61,10 @@ public class UserEntity implements Serializable {
         return id;
     }
 
-    public Set<PredictionEntity> getPredictionEntities() {
-        return predictionEntities;
+    public Collection<PredictionEntity> getPredictionEntities() {
+        final ArrayList<PredictionEntity> results = new ArrayList<>(predictionEntities);
+        Collections.sort(results, (o1, o2) -> o1.getSubmitted().compareTo(o2.getSubmitted()));
+        return results;
     }
 
     public String getEmail() {

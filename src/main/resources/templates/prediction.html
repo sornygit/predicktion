@@ -17,13 +17,7 @@
 <div class="container" style="margin-top: 10px">
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2">
-            <div class="row">
-                <div class="text-center alert alert-info">
-                    <div class="headline"><h1>PREDICKTION&trade;</h1></div>
-                    <div class="mute small">If you like being a dick to people</div>
-                </div>
-            </div>
-            <div class="row">
+            <div class="row text-center">
                 <div class="btn-group" role="group">
                     <a href="/" class="btn btn-default" role="button">Main Page</a>
                     <a href="/prediction" class="btn btn-default active" role="button">Make a Prediction</a>
@@ -70,19 +64,18 @@
                             </p>
                         </div>
                         <div class="form-group">
-                            <label for="braggingLink">Bragging link</label>
+                            <label for="braggingLink">Reveal link</label>
                             <input id="braggingLink" name="braggingLink" type="text" class="form-control"
-                                   placeholder="HTTP link to video or image"
+                                   placeholder="HTTP link to video or image displayed to plebs"
                                    th:field="*{braggingLink}"/>
                             <div class="help-block with-errors" th:if="${#fields.hasErrors('braggingLink')}" th:errors="*{braggingLink}">
                                 Errors
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="braggingMessage">Bragging message (to the person you want to be a dick
-                                to)</label>
+                            <label for="braggingMessage">Reveal message</label>
                             <textarea id="braggingMessage" name="braggingMessage" class="form-control"
-                                      placeholder="Enter a message for your victim (max 2048 chars)"
+                                      placeholder="Enter a message for your victim(s) (max 2048 chars)"
                                       th:field="*{braggingMessage}" rows="5">
                             </textarea>
                             <div class="help-block with-errors" th:if="${#fields.hasErrors('braggingMessage')}" th:errors="*{braggingMessage}">
@@ -90,7 +83,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="keyWords">Keywords/Hashtags/Ohsohawt</label>
+                            <label for="keyWords">Keywords (used for searching)</label>
                             <!--<select id="keyWords" name="keyWords" class="form-control keyWords"-->
                             <!--th:field="*{keyWords}">-->
                             <!--</select>-->
@@ -174,7 +167,12 @@
 $('#unravelDatePicker').datetimepicker({
     format: 'YYYY-MM-DD'
 });
-
 </script>
+<script type="text/javascript">
+  jQuery(document).ready(function () {
+    jQuery('#topic').focus();
+  });
+</script>
+
 </body>
 </html>

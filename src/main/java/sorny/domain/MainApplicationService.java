@@ -188,4 +188,17 @@ public class MainApplicationService {
         }
         return predictionEntity;
     }
+
+    public boolean deletePrediction(Long id) {
+        UserEntity user = getCurrentlyLoggedInUser();
+        PredictionEntity predictionEntity = user.getPredictionWithId(id);
+        if (predictionEntity != null) {
+            user.removePrediction(predictionEntity);
+            user = userRepository.save(user);
+            predictionRepository.delete(id);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

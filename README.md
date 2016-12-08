@@ -38,3 +38,7 @@ Javascript-stuff: jQuery (and a bunch of plugins)
 CSS-stuff: Bootstrap
 
 Java 8+
+
+## NOTE
+
+To build a WAR to deploy on Tomcat, disable the "run-local" default Maven profile and instead activate the "deploy-on-tomcat" one.

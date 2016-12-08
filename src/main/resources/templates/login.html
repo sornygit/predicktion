@@ -13,16 +13,16 @@
     <div class="row">
         <div class="col-lg-4 col-lg-offset-4">
             <div class="row">
-                <div class="text-center well">
+                <div class="text-center alert alert-info">
                     <div class="headline"><h1>PREDICKTION&trade;</h1></div>
                     <div class="mute small">Login - If you like being a dick to people</div>
                 </div>
             </div>
-            <div class="row top10">
-                <h1>NOTE: ALPHA RELEASE</h1>
-                Note: Database may be purged at any time. Don't use unless you're ok with this.
+            <div class="row">
+                <h3>NOTE: ALPHA RELEASE</h3>
+                <div class="mute small">Database may be purged during testing.</div>
             </div>
-            <div class="row top10" th:unless="${#strings.isEmpty(feedback)}">
+            <div class="row" th:unless="${#strings.isEmpty(feedback)}">
                 <div th:if="${error != null}" class="alert alert-danger">
                     <span th:text="${feedback}">Feedback</span>
                 </div>

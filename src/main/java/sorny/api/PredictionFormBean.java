@@ -14,12 +14,9 @@ import java.util.Optional;
  * Created by Magnus on 2016-12-04.
  */
 public class PredictionFormBean implements Serializable {
-    // todo: remove pre-done values after initial setup
-    private static final LocalDate MIN_DATE = LocalDate.now().plusDays(1);
     private Long id;
     @Length(max = 255)
     private String keyWords; // = "potus, trump";
-    @NotEmpty
     @Length(max = 2048)
     private String prediction;
     @Length(max = 255)

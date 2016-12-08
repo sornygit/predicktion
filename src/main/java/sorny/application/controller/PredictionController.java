@@ -81,7 +81,18 @@ public class PredictionController {
 
             return "prediction";
         } else {
-            PredictionFormBean result = userService.savePredictionForm(formBean);
+            PredictionFormBean result = null;
+            try {
+                result = userService.savePredictionForm(formBean);
+            } catch (IllegalArgumentException e) {
+                model.addAttribute("predictionForm", formBean);
+                UserEntity user = userService.getCurrentlyLoggedInUser();
+                model.addAttribute("user", user);
+                model.addAttribute("feedback", "Prediction has validation errors. Fill out required fields and ensure unravelDate is later than tomorrow.");
+                model.addAttribute("error", true);
+
+                return "prediction";
+            }
             model.addAttribute("predictionForm", result);
             UserEntity user = userService.getCurrentlyLoggedInUser();
             model.addAttribute("user", user);

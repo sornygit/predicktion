@@ -32,10 +32,10 @@ public class PredictionEntity implements Serializable {
     @ElementCollection
     private List<String> keyWords = new ArrayList<>();
 
-    @Column(length = 2048)
+    @Column(length = 2048, nullable = true)
     private byte[] encryptedPrediction;
 
-    @Column(length = 2048)
+    @Column(length = 2048, nullable = true)
     private String prediction;
 
     @Column(nullable = false)
@@ -44,16 +44,16 @@ public class PredictionEntity implements Serializable {
     @Basic(optional = false)
     private CameTrueStatus cameTrueStatus = CameTrueStatus.SECRET;
 
-    @Column(length = 2048)
+    @Column(length = 2048, nullable = true)
     private String cameTrueComment;
 
-    @Column(length = 255)
+    @Column(length = 255, nullable = true)
     private String braggingLink;
 
     @Column(length = 2048)
     private String braggingMessage;
 
-    @Column
+    @Column(nullable = true)
     private LocalDate unravelDate;
 
     @Column(nullable = false)

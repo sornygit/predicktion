@@ -108,7 +108,7 @@ public class PredictionController {
             model.addAttribute("predictionForm", result);
             UserEntity user = mainApplicationService.getCurrentlyLoggedInUser();
             model.addAttribute("user", user);
-            model.addAttribute("feedback", "Prediction created.");
+            model.addAttribute("feedback", "Prediction saved.");
             return "predictionOk";
         }
     }

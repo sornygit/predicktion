@@ -6,9 +6,12 @@ import org.hibernate.validator.constraints.NotEmpty;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Optional;
+import java.util.TimeZone;
 
 /**
  * Prediction form bean
@@ -111,5 +114,9 @@ public class PredictionFormBean implements Serializable {
 
     public Timestamp getSubmitted() {
         return submitted;
+    }
+
+    public String getServerTimeZone() {
+        return TimeZone.getDefault().toZoneId().getId();
     }
 }

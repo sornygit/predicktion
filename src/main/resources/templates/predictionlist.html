@@ -78,7 +78,7 @@
                         </span>
                         <span th:unless="${prediction.cameTrueStatus == T(sorny.domain.prediction.CameTrueStatus).SECRET}">
                             <a th:href="@{/announce(id=${prediction.id})}"><i
-                                    class="fa fa-bullhorn" aria-hidden="true"></i></a>&nbsp;
+                                    class="fa fa-bullhorn" aria-hidden="true" title="Announce Prediction to the world!"></i></a>&nbsp;
                         </span>
                         <a th:href="@{/delete(id=${prediction.id})}" onClick="return confirm('Are you really sure you want to be a chicken about it?');">
                             <i class="fa fa-trash" aria-hidden="true" title="Delete prediction (you chicken)"></i></a>

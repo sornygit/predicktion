@@ -19,7 +19,7 @@
                 <div class="text-center alert alert-info">
                     <div class="headline"><h1>PREDICKTION&trade;</h1></div>
                     <div class="mute small">Someone wanted to be a dick to you and show their prediction, submitted at
-                        <span id="submitted" th:text="${prediction.submitted}"></span></div>
+                        <span id="submitted" th:text="${prediction.submitted}"></span> (Timezone <span id="timezone" th:text="${prediction.getServerTimeZone()}">Timezone</span>)</div>
                 </div>
             </div>
             <div class="row top5">

@@ -16,11 +16,11 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         if (!registry.hasMappingForPattern("/webjars/**")) {
             registry.addResourceHandler("/webjars/**").addResourceLocations(
-                    "classpath:/META-INF/resources/webjars/");
+                    "classpath:/META-INF/resources/webjars/").setCachePeriod(3600);
         }
         if (!registry.hasMappingForPattern("/**")) {
             registry.addResourceHandler("/**").addResourceLocations(
-                    CLASSPATH_RESOURCE_LOCATIONS);
+                    CLASSPATH_RESOURCE_LOCATIONS).setCachePeriod(3600);
         }
     }
 }

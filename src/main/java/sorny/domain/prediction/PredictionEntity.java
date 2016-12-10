@@ -16,6 +16,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.TimeZone;
 
 /**
  * JPA Entity for predictions
@@ -218,5 +219,9 @@ public class PredictionEntity implements Serializable {
             formBean.setUnravelDate(getUnravelDate().format(DateTimeFormatter.BASIC_ISO_DATE));
         formBean.setSubmitted(getSubmitted());
         return formBean;
+    }
+
+    public String getServerTimeZone() {
+        return TimeZone.getDefault().toZoneId().getId();
     }
 }

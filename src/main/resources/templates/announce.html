@@ -26,10 +26,9 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="text-center">ANNOUNCEMENT TIME!</h1>
                     <p>
                         The below is what the plebs will see if you send them to <a
-                            th:href="@{/public-predicktion(id=${prediction.id})}">This Link</a>:
+                            th:href="@{/public-predicktion(id=${prediction.id})}" class="btn btn-success">This Link</a> ...
                     </p>
                     <div class="col-lg-12">
                         <p>
@@ -52,7 +51,7 @@
                             <p>
                                 <strong>Message to you about the prediction:</strong>
                             </p>
-                            <p>
+                            <p class="well">
                                 <span id="braggingMessage" th:text="${prediction.braggingMessage}"></span>
                             </p>
                         </div>
